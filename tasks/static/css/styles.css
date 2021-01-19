@@ -320,13 +320,15 @@ footer{
     display: inline-block; 
     border-radius: 5px; 
     padding: 7px 10px; 
-    background-color: #212529; 
+    background-color: #33383b; 
     color:white;
     text-decoration: none;
 }
 a:hover {
     color: white;
     text-decoration: none;
+    cursor: pointer;
+    background-color: #e0ac1c;
 }
 /* Here is the code for Responsive Footer */
 /* You can remove below code if you don't want Footer to be responsive */

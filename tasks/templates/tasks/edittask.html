@@ -10,7 +10,7 @@
         {% csrf_token %}
         {{ form|crispy }}
         <input  id="btn-change"  type="submit" value="Editar tarefa" class="btn btn-success">
-        <button id="btn-change"  type="button" class="btn btn-success" onclick="{window.location.href='http://'+ window.location.host +'/'}">Voltar</button>
+        <a href="{% url 'dashboard' %}" class="button-back">Voltar</a>
     </form>   
 </div>
 
