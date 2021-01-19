@@ -15,14 +15,6 @@ PORT = decouple.config('PORT', cast=int)
 
 @shared_task
 def exec1(data):
-    """
-        data = {
-            'id_task': task.id,
-            'user_email': request.user.email,
-            'title_msg': task.title,
-            'msg_to_send': task.description,
-        }
-    """
     task = Task.objects.get(id=data['id_task'])
     if task.done != 'done':
         sendEmail(task.user.email, task.title, task.description)
