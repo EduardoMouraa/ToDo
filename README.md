@@ -1,2 +1,2 @@
 # ToDo
-Lista de tarefas com auxílio do Celery+Redis
+Web lista de tarefas com Djando, Celery e Redis
