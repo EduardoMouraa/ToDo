@@ -127,5 +127,5 @@ LOGOUT_REDIRECT_URL= '/accounts/login'
 AUTH_USER_MODEL = "users.User" 
 
 
-CELERY_BROKER_URL = os.environ.get("CELERY_BROKER", "redis://192.168.1.15:6379")
-CELERY_RESULT_BACKEND = os.environ.get("CELERY_BROKER", "redis://192.168.1.15:6379")
+CELERY_BROKER_URL = os.environ.get("CELERY_BROKER", "redis://redis:6379/0")
+CELERY_RESULT_BACKEND = os.environ.get("CELERY_BROKER", "redis://redis:6379/0")
