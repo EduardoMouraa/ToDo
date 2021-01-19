@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %} Lista de tarefas 2{% endblock %}
+{% block title %} Lista de tarefas {% endblock %}
 
 
 {% block content %}
@@ -28,7 +28,7 @@
             </a>
         </div>
 
-        <a id="add-link" href="newtask/">
+        <a id="add-link" href="{% url 'new-task' %}">
             <div class="col-2 add-div">
                 <i class="fas fa-plus"></i> Adicionar tarefa
             </div>

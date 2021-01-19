@@ -176,7 +176,7 @@ def tasksDoing(request):
         
         tasks = paginator.get_page(page)
 
-    return render(request, 'tasks/dashboard.html', {'tasks': tasks, 'tasksdonerecently': tasksDoneRecently, 'tasksdone': tasksDone, 'tasksdoing': tasksDoing, 'tasksdonerecentlycount': tasksDoneRecentlyCount, 'all_tasks': all_tasks})
+    return render(request, 'tasks/dashboard.html', {".": True,'tasks': tasks, 'tasksdonerecently': tasksDoneRecently, 'tasksdone': tasksDone, 'tasksdoing': tasksDoing, 'tasksdonerecentlycount': tasksDoneRecentlyCount, 'all_tasks': all_tasks})
 
 @login_required
 def lastDays(request):

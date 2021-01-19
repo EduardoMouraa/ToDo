@@ -324,7 +324,7 @@ footer{
     color:white;
     text-decoration: none;
 }
-a:hover {
+.button-back:hover {
     color: white;
     text-decoration: none;
     cursor: pointer;
