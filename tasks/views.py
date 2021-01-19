@@ -20,21 +20,18 @@ def taskView(request, id):
 @login_required
 def newTask(request):
     if request.method == 'POST':
-        print("opa")
         form = TaskForm(request.POST)
-        print(form.is_valid())
         if form.is_valid():
             task = form.save(commit=False)
             task.done = 'doing'
             task.user = request.user
             task.save()
-            print(request.user.id)
             data = {
-                'user_email': request.user.email,
+                'id_task': task.id,
             }
             exec1.apply_async(
                 (data, ),
-                eta=(datetime.datetime.strptime(request.POST['schedule_date'], "%Y-%m-%dT%H:%M"))
+                eta=(datetime.datetime.strptime(request.POST['schedule_date'], "%Y-%m-%dT%H:%M") + datetime.timedelta(hours=3))
             )
 
             return redirect('/')
@@ -53,8 +50,11 @@ def editTask(request, id):
         
         if(form.is_valid()):
             task.save()
+            messages.info(request, 'Tarefa alterada com sucesso!')
+
             return redirect('/')
         else:
+            messages.info(request, 'Algo de errado ocorreu!')
             
             return render(request, 'tasks/edittask.html', {'form': form, 'task': task})
         
@@ -76,6 +76,7 @@ def changeStatus(request, id):
 
     if(task.done == 'doing'):
         task.done = 'done'
+        messages.info(request, 'Tarefa finalizada, boa! :)')
     else:
         task.done = 'doing'
     
@@ -92,7 +93,6 @@ def changeStatusTask(request, id):
         messages.info(request, 'Tarefa finalizada!')
     else:
         task.done = 'doing'
-    
     
     task.save()
     
@@ -123,7 +123,7 @@ def dashboard(request):
         
         tasks = paginator.get_page(page)
 
-    return render(request, 'tasks/doing.html', {'tasks': tasks, 'tasksdonerecently': tasksDoneRecently, 'tasksdone': tasksDone, 'tasksdoing': tasksDoing, 'tasksdonerecentlycount': tasksDoneRecentlyCount, 'all_tasks': all_tasks})
+    return render(request, 'tasks/dashboard.html', {'tasks': tasks, 'tasksdonerecently': tasksDoneRecently, 'tasksdone': tasksDone, 'tasksdoing': tasksDoing, 'tasksdonerecentlycount': tasksDoneRecentlyCount, 'all_tasks': all_tasks})
 
 
 @login_required
@@ -150,7 +150,7 @@ def tasksDone(request):
         
         tasks = paginator.get_page(page)
 
-    return render(request, 'tasks/done.html', {'tasks': tasks, 'tasksdonerecently': tasksDoneRecently, 'tasksdone': tasksDone, 'tasksdoing': tasksDoing, 'tasksdonerecentlycount': tasksDoneRecentlyCount, 'all_tasks': all_tasks})
+    return render(request, 'tasks/dashboard.html', {'tasks': tasks, 'tasksdonerecently': tasksDoneRecently, 'tasksdone': tasksDone, 'tasksdoing': tasksDoing, 'tasksdonerecentlycount': tasksDoneRecentlyCount, 'all_tasks': all_tasks})
 
 @login_required
 def tasksDoing(request):
@@ -176,7 +176,7 @@ def tasksDoing(request):
         
         tasks = paginator.get_page(page)
 
-    return render(request, 'tasks/doing.html', {'tasks': tasks, 'tasksdonerecently': tasksDoneRecently, 'tasksdone': tasksDone, 'tasksdoing': tasksDoing, 'tasksdonerecentlycount': tasksDoneRecentlyCount, 'all_tasks': all_tasks})
+    return render(request, 'tasks/dashboard.html', {'tasks': tasks, 'tasksdonerecently': tasksDoneRecently, 'tasksdone': tasksDone, 'tasksdoing': tasksDoing, 'tasksdonerecentlycount': tasksDoneRecentlyCount, 'all_tasks': all_tasks})
 
 @login_required
 def lastDays(request):
@@ -202,5 +202,5 @@ def lastDays(request):
         
         tasks = paginator.get_page(page)
 
-    return render(request, 'tasks/lastdays.html', {'tasks': tasks, 'tasksdonerecently': tasksDoneRecently, 'tasksdone': tasksDone, 'tasksdoing': tasksDoing, 'tasksdonerecentlycount': tasksDoneRecentlyCount, 'all_tasks': all_tasks})
+    return render(request, 'tasks/dashboard.html', {'tasks': tasks, 'tasksdonerecently': tasksDoneRecently, 'tasksdone': tasksDone, 'tasksdoing': tasksDoing, 'tasksdonerecentlycount': tasksDoneRecentlyCount, 'all_tasks': all_tasks})
 

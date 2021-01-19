@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %} Lista de tarefas {% endblock %}
+{% block title %} Lista de tarefas 3{% endblock %}
 
 {% load static %}
 {% load filtros %}
@@ -10,26 +10,26 @@
     {% if messages %}
     <ul class="messages">
         {% for message in messages %}
-            <li {% if message.tags %}class="alert alert-{{message.tags}}"{% endif %}>{{ message }}</li>
+        <li {% if message.tags %}class="alert alert-{{message.tags}}" {% endif %}>{{ message }}</li>
         {% endfor %}
     </ul>
     {% endif %}
     <h5 class="task-description">Description: </h5>
-    <h5 class="task-content"><p>{{task.description}}</p></h3>
-    <input type="datetime-local" name="schedule_date" id="schedule_date" value="{{task.schedule_date|convert_date}}" ><br><br>
-    <button id="btn-change" type="button" class="btn btn-success" onclick="{window.location.href='../edit/{{task.id}}'}">Editar</button>
-    <button id="btn-change" type="button" class="btn btn-success" onclick="{window.location.href='http://'+ window.location.host +'/'}">Voltar</button>
-    <a href="../../delete/{{task.id}}" class="delete-btn"><span><i class="fas fa-trash"></i></span></a>
-    <a href="../../edit/{{task.id}}"><span><i class="fas fa-edit"></i></span></a>
-    {% if task.done == 'doing' %}
-    <a href="../../changestatustask/{{task.id}}"><span><i class="fas fa-check"></i></span></a>
-    {% else %}
-    <a href="../../changestatustask/{{task.id}}"><span><i class="fas fa-check blue"></i></span></a>
-    {% endif %}
-    
-    </a>
-    {% block scripts %}
-    {% endblock scripts %}
+    <h5 class="task-content">
+        <p>{{task.description}}</p>
+        </h3>
+        <input type="datetime-local" name="schedule_date" id="schedule_date"
+            value="{{task.schedule_date|convert_date}}"><br><br>
+        <button id="btn-change" type="button" class="btn btn-success"
+            onclick="{window.location.href='../edit/{{task.id}}'}">Editar</button>
+        <button id="btn-change" type="button" class="btn btn-success"
+            onclick="{window.location.href='http://'+ window.location.host +'/'}">Voltar</button>
+        <a href="{% url 'delete-task' task.id %}" class="delete-btn"><span><i class="fas fa-trash"></i></span></a>
+        <a href="{% url 'edit-task' task.id %}"><span><i class="fas fa-edit"></i></span></a>
+        <a href="{% url 'change-status-task' task.id %}"><span><i
+                    class="fas fa-check {% if task.done == 'done' %}blue{% endif %}"></i></span></a>
+        {% block scripts %}
+        {% endblock scripts %}
 </div>
 
 {% endblock %}

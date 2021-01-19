@@ -20,7 +20,6 @@ prompt-toolkit==3.0.10
 psycopg2-binary==2.8.6
 python-decouple==3.4
 pytz==2020.5
-pywin32==227
 redis==3.5.3
 requests==2.25.1
 six==1.15.0
