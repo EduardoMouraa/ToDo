@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} Editando: {{task.title}} {% endblock %}
+
+
+{% block content %}
+<div class="offset-1 col-10 edit-div">
+    <h1 class="title-edit"> Editando: '{{task.title}}'</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input  id="btn-change"  type="submit" value="Editar tarefa" class="btn btn-success">
+        <button id="btn-change"  type="button" class="btn btn-success" onclick="{window.location.href='http://'+ window.location.host +'/'}">Voltar</button>
+    </form>   
+</div>
+
+
+{% block scripts %}
+<script>
+var date = document.getElementById('initial-id_schedule_date').value
+var format = date.split(' ')
+document.getElementById('id_schedule_date').value = format[0]+'T'+format[1]
+
+</script>
+
+{% endblock scripts %}
+{% endblock %}

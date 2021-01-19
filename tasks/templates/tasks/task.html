@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %} Lista de tarefas {% endblock %}
+
+{% load static %}
+{% load filtros %}
+{% block content %}
+<div class="offset-1 col-10 list-div">
+    <h1 class="task-title">Title: {{task.title}}</h1>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li {% if message.tags %}class="alert alert-{{message.tags}}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <h5 class="task-description">Description: </h5>
+    <h5 class="task-content"><p>{{task.description}}</p></h3>
+    <input type="datetime-local" name="schedule_date" id="schedule_date" value="{{task.schedule_date|convert_date}}" ><br><br>
+    <button id="btn-change" type="button" class="btn btn-success" onclick="{window.location.href='../edit/{{task.id}}'}">Editar</button>
+    <button id="btn-change" type="button" class="btn btn-success" onclick="{window.location.href='http://'+ window.location.host +'/'}">Voltar</button>
+    <a href="../../delete/{{task.id}}" class="delete-btn"><span><i class="fas fa-trash"></i></span></a>
+    <a href="../../edit/{{task.id}}"><span><i class="fas fa-edit"></i></span></a>
+    {% if task.done == 'doing' %}
+    <a href="../../changestatustask/{{task.id}}"><span><i class="fas fa-check"></i></span></a>
+    {% else %}
+    <a href="../../changestatustask/{{task.id}}"><span><i class="fas fa-check blue"></i></span></a>
+    {% endif %}
+    
+    </a>
+    {% block scripts %}
+    {% endblock scripts %}
+</div>
+
+{% endblock %}

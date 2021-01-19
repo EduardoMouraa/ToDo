@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Entrar no Todo-Dudu {% endblock %}
+
+
+{% block content %}
+<div class="rl-md-4 offset-md-0" id="login-div">
+    <div class="col-md-4 offset-md-4">
+        <div class="card auth-card">
+            <div class="card-body">
+                <h4 class="card-title text-center">
+                    ToDo-Dudu list
+                </h4>
+
+                <form method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ next }}">
+
+                    {{form|crispy}}
+
+                    <button type="submit" class="btn btn-primary btn-block" id="login-btn">Entrar</button>
+                </form>
+                
+            </div>
+            
+        </div>
+        <p class="change-form-p" id="link">Não possui uma conta? <a href="/accounts/register">Crie agora</a></p>
+    </div>
+</div>
+
+{% endblock %}
