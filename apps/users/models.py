@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
+from django.contrib.auth import get_user_model
 
 class User(AbstractUser):
     username = models.CharField(max_length=10, unique=True)
