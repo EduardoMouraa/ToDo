@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 from .forms import TaskForm
 from .models import Task
-from .tasks import exec1
+from .tasks import checkTask
 import pytz
 import datetime
 
@@ -29,7 +29,7 @@ def newTask(request):
             data = {
                 'id_task': task.id,
             }
-            exec1.apply_async(
+            checkTask.apply_async(
                 (data, ),
                 eta=(datetime.datetime.strptime(request.POST['schedule_date'], "%Y-%m-%dT%H:%M") + datetime.timedelta(hours=3))
             )
