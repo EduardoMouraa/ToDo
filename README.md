@@ -1,5 +1,5 @@
 # ToDo
-Web lista de tarefas com Djando, Celery e Redis
+Lista de tarefas com Django(rest_framework), Celery e Redis
 
 # Pré-requisitos
 Baixar lib's necessárias
