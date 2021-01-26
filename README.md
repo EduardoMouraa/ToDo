@@ -2,12 +2,6 @@
 Lista de tarefas com Django(rest_framework), Celery e Redis
 
 # Pré-requisitos
-Baixar lib's necessárias
-
-   ```
-    pip install -r requirements.txt
-   ```
-
 Criar na raíz do repositório o arquivo .env com as seguintes variáveis
 
    ```
