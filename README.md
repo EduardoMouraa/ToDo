@@ -8,7 +8,7 @@ Baixar lib's necessárias
     pip install -r requirements.txt
    ```
 
-Criar arquivo .env com as seguintes variáveis
+Criar na raíz do repositório o arquivo .env com as seguintes variáveis
 
    ```
     DEBUG=True
