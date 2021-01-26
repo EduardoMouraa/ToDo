@@ -19,7 +19,7 @@ def checkTask(data):
     if task.done != 'done':
         sendEmail(task.user.email, task.title, task.description)
 
-    return data 
+    return {"data": data, 'email': task.user.email} 
 
     
 
@@ -33,11 +33,11 @@ def sendEmail(destination_email,title, msg):
     message = 'Tarefa atrasada. A descrição da tarefa se encontra logo abaixo.\n\n"{}"'.format(msg)
     email_msg = MIMEMultipart()
     email_msg['From'] = USERNAME
-    email_msg['To'] = 'eduardoed18@hotmail.com' ## destination_email
+    email_msg['To'] = destination_email ## destination_email
     email_msg['Subject'] = 'A tarefa "{}" está atrasada!'.format(title)
     email_msg.attach(MIMEText(message, 'plain'))
 
     # Enviando mensagem
-    server.sendmail(USERNAME,'eduardoed18@hotmail.com', email_msg.as_string())
+    server.sendmail(USERNAME, destination_email, email_msg.as_string())
     server.quit()
     return ''

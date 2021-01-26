@@ -6,9 +6,11 @@ from rest_framework import viewsets
 
 from django.shortcuts import render
 
+from .serializers import TasksSerializers, UserSerializers
+from apps.users.models import User
 from apps.tasks.models import Task
-from .serializers import TasksSerializers
 from apps.tasks.tasks import checkTask
+
 from datetime import datetime, timedelta
 
 class TaskViewSet(viewsets.ModelViewSet):
@@ -41,3 +43,20 @@ class TaskViewSet(viewsets.ModelViewSet):
             response = {"Failed": "Erro na criação da tarefa."}
 
         return Response(response)
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializers
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    http_method_names = ['get']
+
+    def list(self, request):
+        queryset = User.objects.all()
+        serializer = UserSerializers(queryset, many=True)
+        return Response(serializer.data)
+
+    def retrieve(self, request, pk=None):
+        user = User.objects.get(id=pk)
+        serializer = UserSerializers(user)
+        return Response(serializer.data)
